@@ -1,6 +1,6 @@
 {
   "name": "homepagesuite",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "author": "Nir Li <nir@prom-ai.com>",
   "description": "Home Page for WizSuite",
   "main": "index.js",
