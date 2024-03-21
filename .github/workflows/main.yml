@@ -24,4 +24,9 @@ jobs:
         npm version ${{ steps.get_release_tag.outputs.RELEASE_TAG }} --no-git-tag-version
         
     - name: Commit and Push Changes
-      run: git push origin HEAD
+      run: |
+        git config user.name 'Nir Li'
+        git config user.email 'nir@prom-ai.com'
+        git add package.json
+        git commit -m "Update package version to ${{ steps.get_release_tag.outputs.RELEASE_TAG }}"
+        git push origin HEAD:refs/heads/main
