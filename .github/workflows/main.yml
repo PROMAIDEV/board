@@ -26,9 +26,4 @@ jobs:
         npm version ${{ steps.get_release_tag.outputs.RELEASE_TAG }} --no-git-tag-version
         
     - name: Commit and Push Changes
-      run: |
-        git config user.name 'GitHub Actions'
-        git config user.email 'github-actions@github.com'
-        git add package.json
-        git commit -m "Update package version to ${{ steps.get_release_tag.outputs.RELEASE_TAG }}"
-        git push
+      run: git push
