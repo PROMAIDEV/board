@@ -3,9 +3,7 @@ name: Update Package Version
 on:
   release:
     types: [published]
-
 jobs:
-
   update-package-version:
     runs-on: ubuntu-latest
 
@@ -26,4 +24,4 @@ jobs:
         npm version ${{ steps.get_release_tag.outputs.RELEASE_TAG }} --no-git-tag-version
         
     - name: Commit and Push Changes
-      run: git push
+      run: git push origin HEAD
