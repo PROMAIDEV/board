@@ -1,0 +1,34 @@
+name: Update Package Version
+
+on:
+  release:
+    types: [published]
+
+jobs:
+
+  update-package-version:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 20.x
+        
+    - name: Get Release Tag
+      id: get_release_tag
+      run: echo ::set-output name=RELEASE_TAG::$(echo ${GITHUB_REF##*/})
+      
+    - name: Update package.json
+      run: |
+        npm version ${{ steps.get_release_tag.outputs.RELEASE_TAG }} --no-git-tag-version
+        
+    - name: Commit and Push Changes
+      run: |
+        git config user.name 'GitHub Actions'
+        git config user.email 'github-actions@github.com'
+        git add package.json
+        git commit -m "Update package version to ${{ steps.get_release_tag.outputs.RELEASE_TAG }}"
+        git push
